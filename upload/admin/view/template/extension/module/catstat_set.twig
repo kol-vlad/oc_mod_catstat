@@ -1,0 +1,190 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			
+			<!-- Кнопки управления -->
+			<div class="pull-right">
+				<button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+			</div>
+			
+			<!-- Название модуля -->
+			<h1>{{ heading_title }}</h1>
+			
+			<!-- Хлебные крошки -->
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ul>
+			
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+					<li><a href="#tab-csvs" data-toggle="tab">CSV Импорт статей</a></li>
+					<li><a href="#tab-csvc" data-toggle="tab">CSV Импорт категорий</a></li>
+					
+				</ul>
+				
+				
+				
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab-general">
+						
+						
+						<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+							
+							<!-- Настройка: "Статус" -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+								<div class="col-sm-10">
+									
+									<select name="module_catstat_status" id="input-status" class="form-control">
+										{% if module_catstat_status %}
+										<option value="1" selected="selected">{{ text_enabled }}</option>
+										<option value="0">{{ text_disabled }}</option>
+										{% else %}
+										<option value="1">{{ text_enabled }}</option>
+										<option value="0" selected="selected">{{ text_disabled }}</option>
+										{% endif %}
+									</select>
+									
+								</div>
+							</div>
+							
+						</form>
+					</div>
+					
+					
+					<div class="tab-pane " id="tab-csvs">
+						<form action="{{ actioncsv }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+							
+							
+							
+							<div class="form-group ">
+								
+								<label class="col-sm-2 control-label" >Выберите CSV файл</label>  <div class="col-sm-10"><input name="csv" type="file" class="form-control"></div>
+								
+								<label class="col-sm-2 control-label" >Поле id</label>
+								<div class="col-sm-10">
+									<input type="text" name="stati_id" value="id"  class="form-control" />
+								</div>
+								
+								
+								<label class="col-sm-2 control-label" >Поле Title</label>
+								<div class="col-sm-10">
+									<input type="text" name="title" value="title"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле Текст</label>
+								<div class="col-sm-10">
+									<input type="text" name="text" value="fulltext"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле Анонс</label>
+								<div class="col-sm-10">
+									<input type="text" name="intro" value="introtext"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле id Категории</label>
+								<div class="col-sm-10">
+									<input type="text" name="category" value="catid"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле URL</label>
+								<div class="col-sm-10">
+									<input type="text" name="url" value="alias"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле Metatitle</label>
+								<div class="col-sm-10">
+									<input type="text" name="metatitle" value="title"  class="form-control" />
+								</div>
+								<label class="col-sm-2 control-label" >Поле Metadesc</label>
+								<div class="col-sm-10">
+									<input type="text" name="metadesc" value="metadesc"  class="form-control" />
+								</div>
+								<label class="col-sm-2 control-label" >Поле Metakeys</label>
+								<div class="col-sm-10">
+									<input type="text" name="metakey" value="metakey"  class="form-control" />
+								</div>
+								
+								
+								
+								<label class="col-sm-2 control-label" > </label><div class="col-sm-10"><button>Отправить</button></div>
+							</div>
+						
+						
+					</form>
+					</div>
+					
+					<div class="tab-pane " id="tab-csvc">
+						<form action="{{ actioncsvcat }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+							
+							
+							
+							<div class="form-group ">
+								
+								<label class="col-sm-2 control-label" >Выберите CSV файл</label>  <div class="col-sm-10"><input name="csv" type="file" class="form-control"></div>
+								
+								<label class="col-sm-2 control-label" >Поле id</label>
+								<div class="col-sm-10">
+									<input type="text" name="id" value="id"  class="form-control" />
+								</div>
+								
+								
+								<label class="col-sm-2 control-label" >Поле Title</label>
+								<div class="col-sm-10">
+									<input type="text" name="title" value="title"  class="form-control" />
+								</div>
+								
+								
+								<label class="col-sm-2 control-label" >Поле Parent</label>
+								<div class="col-sm-10">
+									<input type="text" name="parent" value="parent_id"  class="form-control" />
+								</div>
+								
+								<label class="col-sm-2 control-label" >Поле URL</label>
+								<div class="col-sm-10">
+									<input type="text" name="url" value="alias"  class="form-control" />
+								</div>
+								
+								
+								<label class="col-sm-2 control-label" >Поле Metadesc</label>
+								<div class="col-sm-10">
+									<input type="text" name="metadesc" value="metadesc"  class="form-control" />
+								</div>
+								<label class="col-sm-2 control-label" >Поле Metakeys</label>
+								<div class="col-sm-10">
+									<input type="text" name="metakey" value="metakey"  class="form-control" />
+								</div>
+								
+								
+								
+								<label class="col-sm-2 control-label" > </label><div class="col-sm-10"><button>Отправить</button></div>
+							</div>
+					
+						
+						</form>	</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		
+		
+		
+	</div>
+</div>
+
+{{ footer }}

@@ -1,0 +1,8 @@
+<div class="sidebar">
+  <ul class="nav nav-tabs nav-stacked">
+    {% for cats in catst %}
+    <li><a href="{{ cats.href }}">{{ cats.title }}</a></li>
+    {% endfor %}
+    
+  </ul>
+</div>
